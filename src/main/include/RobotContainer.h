@@ -29,15 +29,18 @@
 
 #include "Constants.h"
 #include "Subsystems/DriveSubsystem.h"
+#include "Commands/Auto.h"
 
 class RobotContainer {
  public:
   RobotContainer();
 
-  frc2::CommandPtr GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand();
 
  private:
   frc::XboxController driverController{OIConstants::kDriverControllerPort};
+
+  frc2::CommandPtr exampleAuto = autos::ExampleAuto();
 
   
   DriveSubsystem drive;

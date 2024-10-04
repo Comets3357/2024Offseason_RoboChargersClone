@@ -25,6 +25,6 @@ RobotContainer::RobotContainer() {
 
 void RobotContainer::ConfigureBindings() {}
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  return frc2::cmd::Print("No autonomous command configured");
+frc2::Command* RobotContainer::GetAutonomousCommand() {
+  return exampleAuto.get();
 }
