@@ -6,6 +6,8 @@
 
 #include <frc2/command/CommandPtr.h>
 
+#include "Subsystems/IndexerSubsystem.h"
+
 class RobotContainer {
  public:
   RobotContainer();
@@ -13,5 +15,11 @@ class RobotContainer {
   frc2::CommandPtr GetAutonomousCommand();
 
  private:
+  IndexerSubsystem indexer;
+
+  frc2::CommandPtr IndexerIntake();
+  frc2::CommandPtr IndexerToLauncher();
+  frc2::CommandPtr IndexerStop();
+  frc2::CommandPtr IndexerEject();
   void ConfigureBindings();
 };

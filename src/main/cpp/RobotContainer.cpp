@@ -10,6 +10,28 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
 }
 
+frc2::CommandPtr RobotContainer::IndexerIntake() {
+  return frc2::cmd::Run([this] {
+    if (indexer.GamePieceDetected()){
+      indexer.StopMotor();
+    } else {
+      indexer.RunMotor(0.2);
+    }
+  });
+}
+
+frc2::CommandPtr RobotContainer::IndexerToLauncher() {
+  return frc2::cmd::Run([this] {indexer.RunMotor(0.5);});
+}
+
+frc2::CommandPtr RobotContainer::IndexerStop() {
+  return frc2::cmd::RunOnce([this] {indexer.StopMotor();});
+}
+
+frc2::CommandPtr RobotContainer::IndexerEject() {
+  return frc2::cmd::Run([this] {indexer.RunMotor(-0.4);});
+}
+
 void RobotContainer::ConfigureBindings() {}
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
