@@ -4,9 +4,22 @@
 
 #include "RobotContainer.h"
 
-#include <frc2/command/Commands.h>
+
 
 RobotContainer::RobotContainer() {
+  drive.SetDefaultCommand(frc2::RunCommand(
+      [this] {
+        drive.Drive(
+            -units::meters_per_second_t{frc::ApplyDeadband(
+                driverController.GetLeftY(), OIConstants::kDriveDeadband)},
+            -units::meters_per_second_t{frc::ApplyDeadband(
+                driverController.GetLeftX(), OIConstants::kDriveDeadband)},
+            -units::radians_per_second_t{frc::ApplyDeadband(
+                driverController.GetRightX(), OIConstants::kDriveDeadband)},
+            true, true);
+      },
+      {&drive}));
+
   ConfigureBindings();
 }
 
