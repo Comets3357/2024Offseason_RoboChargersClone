@@ -7,19 +7,25 @@
 #include <frc2/command/CommandPtr.h>
 
 #include "Subsystems/AmpSubsystem.h"
-
+#include <frc/XboxController.h>
+#include <frc2/command/button/CommandXboxController.h>
+#include <frc2/command/RunCommand.h>
+#include <frc/MathUtil.h>
+#include <frc2/command/button/JoystickButton.h>
+#include <frc/smartdashboard/SendableChooser.h>
 class RobotContainer {
  public:
   RobotContainer();
 
   frc2::CommandPtr GetAutonomousCommand();
-
+   
+  frc2::CommandXboxController DriverController{0};
   
 
  private:
   AmpSubsystem Amp;
   frc2::CommandPtr AmpEject();
-  frc2::CommandPtr AmpExtend();
+  frc2::CommandPtr AmpStop();
 
   void ConfigureBindings(); 
 };

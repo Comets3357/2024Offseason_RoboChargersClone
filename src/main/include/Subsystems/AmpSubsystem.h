@@ -9,9 +9,10 @@ class AmpSubsystem : public frc2::SubsystemBase
 {
     public:
         AmpSubsystem();
-        void Periodic() override;
+        //void Periodic() override;
         void AmpExtend(double AmpExtendPower);
         void AmpEject(double AmpEjectPower);
+        void AmpStop();
     private:
         rev::CANSparkMax AmpMotor {51, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
           

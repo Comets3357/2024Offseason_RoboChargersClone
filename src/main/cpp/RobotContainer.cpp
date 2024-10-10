@@ -9,7 +9,8 @@
 
 
 RobotContainer::RobotContainer() {
-  ConfigureBindings();
+  DriverController.X().WhileTrue(AmpEject());
+  DriverController.X().WhileFalse(AmpStop());
 }
 
 void RobotContainer::ConfigureBindings() {}
@@ -21,4 +22,9 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
 frc2::CommandPtr RobotContainer::AmpEject()
 {
   return frc2::cmd::Run([this]{Amp.AmpEject(-0.1);});
+}
+
+frc2::CommandPtr RobotContainer::AmpStop()
+{
+  return frc2::cmd::Run([this] {Amp.AmpStop();});
 }
