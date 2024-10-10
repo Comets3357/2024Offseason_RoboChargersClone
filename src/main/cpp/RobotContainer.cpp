@@ -4,6 +4,8 @@
 
 #include "RobotContainer.h"
 
+#include <frc2/command/button/Trigger.h>
+
 #include <frc2/command/Commands.h>
 
 RobotContainer::RobotContainer() {
@@ -32,7 +34,12 @@ frc2::CommandPtr RobotContainer::IndexerEject() {
   return frc2::cmd::Run([this] {indexer.RunMotor(-0.4);});
 }
 
-void RobotContainer::ConfigureBindings() {}
+void RobotContainer::ConfigureBindings() {
+  driverController.A().WhileTrue(IndexerIntake());
+  driverController.A().OnFalse(IndexerStop());
+  driverController.B().WhileTrue(IndexerEject());
+  driverController.B().OnFalse(IndexerStop());
+}
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   return frc2::cmd::Print("No autonomous command configured");
