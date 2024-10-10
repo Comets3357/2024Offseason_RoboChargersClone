@@ -24,8 +24,6 @@ class RobotContainer {
 
  private:
   AmpSubsystem Amp;
-  frc2::CommandPtr AmpEject();
-  frc2::CommandPtr AmpStop();
 
   void ConfigureBindings(); 
 };
