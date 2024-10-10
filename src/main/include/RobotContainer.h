@@ -6,12 +6,20 @@
 
 #include <frc2/command/CommandPtr.h>
 
+#include "Subsystems/AmpSubsystem.h"
+
 class RobotContainer {
  public:
   RobotContainer();
 
   frc2::CommandPtr GetAutonomousCommand();
 
+  
+
  private:
-  void ConfigureBindings();
+  AmpSubsystem Amp;
+  frc2::CommandPtr AmpEject();
+  frc2::CommandPtr AmpExtend();
+
+  void ConfigureBindings(); 
 };
