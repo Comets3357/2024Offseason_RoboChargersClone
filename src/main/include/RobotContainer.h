@@ -5,6 +5,13 @@
 #pragma once
 
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/button/Trigger.h>
+#include <frc2/command/button/CommandXboxController.h>
+#include <frc2/command/Commands.h>
+#include <frc2/command/button/JoystickButton.h>
+#include <frc/smartdashboard/SendableChooser.h>
+
+#include "Subsystems/IndexerSubsystem.h"
 
 class RobotContainer {
  public:
@@ -13,5 +20,13 @@ class RobotContainer {
   frc2::CommandPtr GetAutonomousCommand();
 
  private:
+  IndexerSubsystem indexer;
+
+  frc2::CommandXboxController driverController{0};
+
+  frc2::CommandPtr IndexerIntake();
+  frc2::CommandPtr IndexerToLauncher();
+  frc2::CommandPtr IndexerStop();
+  frc2::CommandPtr IndexerEject();
   void ConfigureBindings();
 };
