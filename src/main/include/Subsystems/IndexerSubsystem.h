@@ -10,17 +10,9 @@ class IndexerSubsystem : public frc2::SubsystemBase {
    IndexerSubsystem();
 
    /**
-   * Runs the motor using the power of Somali Bidirectional Acceleration Flicker Gooning
-   * 
    * @param power How much power to put into the motor from [-1,1]
    */
    void RunMotor(double power);
-
-   /**
-   * Stops the motor using the power of Russian Multidimensional Elementary Still Water + Adrenaline + Noradrenaline
-   * 
-   * Those who know💀
-   */
    void StopMotor();
 
    /*
