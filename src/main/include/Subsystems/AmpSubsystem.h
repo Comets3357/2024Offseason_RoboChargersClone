@@ -14,6 +14,6 @@ class AmpSubsystem : public frc2::SubsystemBase
         void AmpEject(double AmpEjectPower);
         void AmpStop();
     private:
-        rev::CANSparkMax AmpMotor {51, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+        rev::CANSparkMax AmpMotor {21, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
           
 };

@@ -3,14 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
-
+#include "Commands/AmpCommands.h"
 #include <frc2/command/Commands.h>
 
 
 
 RobotContainer::RobotContainer() {
-  DriverController.X().WhileTrue(AmpEject());
-  DriverController.X().WhileFalse(AmpStop());
+  DriverController.X().OnTrue(AmpEject(&Amp));
+  DriverController.X().OnFalse(AmpStop(&Amp));
 }
 
 void RobotContainer::ConfigureBindings() {}
@@ -19,12 +19,4 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   return frc2::cmd::Print("No autonomous command configured");
 }
 
-frc2::CommandPtr RobotContainer::AmpEject()
-{
-  return frc2::cmd::Run([this]{Amp.AmpEject(-0.1);});
-}
 
-frc2::CommandPtr RobotContainer::AmpStop()
-{
-  return frc2::cmd::Run([this] {Amp.AmpStop();});
-}
