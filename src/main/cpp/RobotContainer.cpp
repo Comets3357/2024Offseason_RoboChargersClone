@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
+#include "Commands/IndexerCommands.h"
 
 #include <frc2/command/Commands.h>
 
@@ -10,33 +11,11 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
 }
 
-frc2::CommandPtr RobotContainer::IndexerIntake() {
-  return frc2::cmd::Run([this] {
-    if (indexer.GamePieceDetected()){
-      indexer.StopMotor();
-    } else {
-      indexer.RunMotor(0.2);
-    }
-  });
-}
-
-frc2::CommandPtr RobotContainer::IndexerToLauncher() {
-  return frc2::cmd::Run([this] {indexer.RunMotor(0.5);});
-}
-
-frc2::CommandPtr RobotContainer::IndexerStop() {
-  return frc2::cmd::RunOnce([this] {indexer.StopMotor();});
-}
-
-frc2::CommandPtr RobotContainer::IndexerEject() {
-  return frc2::cmd::Run([this] {indexer.RunMotor(-0.4);});
-}
-
 void RobotContainer::ConfigureBindings() {
-  driverController.A().WhileTrue(IndexerIntake());
-  driverController.A().OnFalse(IndexerStop());
-  driverController.B().WhileTrue(IndexerEject());
-  driverController.B().OnFalse(IndexerStop());
+  driverController.A().WhileTrue(IndexerIntake(&indexer));
+  driverController.A().OnFalse(IndexerStop(&indexer));
+  driverController.B().WhileTrue(IndexerEject(&indexer));
+  driverController.B().OnFalse(IndexerStop(&indexer));
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {

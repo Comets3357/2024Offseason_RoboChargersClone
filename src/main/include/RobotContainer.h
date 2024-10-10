@@ -20,9 +20,5 @@ class RobotContainer {
 
   frc2::CommandXboxController driverController{0};
 
-  frc2::CommandPtr IndexerIntake();
-  frc2::CommandPtr IndexerToLauncher();
-  frc2::CommandPtr IndexerStop();
-  frc2::CommandPtr IndexerEject();
   void ConfigureBindings();
 };
