@@ -5,6 +5,9 @@
 #pragma once
 
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/button/CommandXboxController.h>
+
+#include "Subsystems/IndexerSubsystem.h"
 
 class RobotContainer {
  public:
@@ -13,5 +16,9 @@ class RobotContainer {
   frc2::CommandPtr GetAutonomousCommand();
 
  private:
+  IndexerSubsystem indexer;
+
+  frc2::CommandXboxController driverController{0};
+
   void ConfigureBindings();
 };
