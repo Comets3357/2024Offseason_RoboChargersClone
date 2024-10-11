@@ -1,11 +1,11 @@
 #include "Commands/DriveCommands.h"
 
-frc2::CommandPtr DriveCommands::StopDrive(DriveSubsystem* drive) {
+frc2::CommandPtr StopDrive(DriveSubsystem* drive) {
    return frc2::cmd::RunOnce([drive] {drive->Drive(0_mps, 0_mps, 0_rad_per_s, true, true);});
 }
 
 
-frc2::CommandPtr DriveCommands::DriveTo(DriveSubsystem* drive, double xPosition, double yPosition, double rotation = 0) {
+frc2::CommandPtr DriveTo(DriveSubsystem* drive, double xPosition, double yPosition, double rotation = 0) {
    return frc2::FunctionalCommand(
       [drive] {drive->ResetEncoders();},
       [drive, xPosition, yPosition, rotation] {
@@ -18,7 +18,7 @@ frc2::CommandPtr DriveCommands::DriveTo(DriveSubsystem* drive, double xPosition,
          units::radians_per_second_t rps{rotation/time};
          drive->Drive(xSpeed, ySpeed, rps, true, true);
       },
-      [drive] (bool interrupted) {DriveCommands::StopDrive(drive);},
+      [drive] (bool interrupted) {StopDrive(drive);},
       [drive, xPosition, yPosition] {
          double xCurPos = drive->GetPose().X().value();
          double yCurPos = drive->GetPose().Y().value();
