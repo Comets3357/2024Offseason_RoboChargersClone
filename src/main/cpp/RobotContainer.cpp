@@ -6,14 +6,14 @@
 #include "Commands/AmpCommands.h"
 #include <frc2/command/Commands.h>
 
-
-
-RobotContainer::RobotContainer() {
-  DriverController.X().OnTrue(AmpEject(&Amp));
+void RobotContainer::ConfigureBindings() {
+    DriverController.X().OnTrue(AmpEject(&Amp));
   DriverController.X().OnFalse(AmpStop(&Amp));
 }
 
-void RobotContainer::ConfigureBindings() {}
+RobotContainer::RobotContainer() {
+ConfigureBindings();
+}
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   return frc2::cmd::Print("No autonomous command configured");
