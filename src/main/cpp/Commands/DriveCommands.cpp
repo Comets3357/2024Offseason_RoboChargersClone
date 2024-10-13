@@ -50,5 +50,5 @@ frc2::CommandPtr DriveTo(DriveSubsystem *driveSubsystem, units::meter_t xPositio
 }
 
 frc2::CommandPtr DriveTo(DriveSubsystem *driveSubsystem, units::meter_t xPositionMeters, units::meter_t yPositionMeters) {
-   return DriveTo(driveSubsystem, xPositionMeters, yPositionMeters, 0_rad, 0_mps);
+   return DriveTo(driveSubsystem, xPositionMeters, yPositionMeters, 0_rad, 3_mps);
 }
