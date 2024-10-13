@@ -16,6 +16,12 @@
   },
   "C_Cpp.default.configurationProvider": "vscode-wpilib",
   "files.associations": {
-    "cstdlib": "cpp"
+    "cstdlib": "cpp",
+    "*.tcc": "cpp",
+    "optional": "cpp",
+    "system_error": "cpp",
+    "regex": "cpp",
+    "*.inc": "cpp",
+    "utility": "cpp"
   }
 }

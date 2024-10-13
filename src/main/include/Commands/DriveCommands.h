@@ -1,16 +1,11 @@
 #pragma once
 
-#include <frc2/command/CommandPtr.h>
 #include <frc2/command/Commands.h>
-#include <frc2/command/FunctionalCommand.h>
 #include "Subsystems/DriveSubsystem.h"
 
-/**
- * Drives to a certain position from the current position(Opponent starts Jamaican Smiling(those who know(only balkans understand(from the screen to the ring to the pen to the king))))
- *
- * @param xPosition X Position to drive to
- * @param yPosition Y Position to drive to
- * @param rotation How much to rotate in radians
- */
-frc2::CommandPtr DriveTo(DriveSubsystem *drive, double xPosition, double yPosition, double rotation);
-frc2::CommandPtr StopDrive(DriveSubsystem *drive);
+frc2::CommandPtr DriveTo(DriveSubsystem *driveSubsystem, units::meter_t xPositionMeters, units::meter_t yPositionMeters, units::radian_t rotationRadians, units::meters_per_second_t maxSpeedMetersPerSecond);
+frc2::CommandPtr DriveTo(DriveSubsystem *driveSubsystem, units::meter_t xPositionMeters, units::meter_t yPositionMeters, units::radian_t rotationRadians);
+frc2::CommandPtr DriveTo(DriveSubsystem *driveSubsystem, units::meter_t xPositionMeters, units::meter_t yPositionMeters, units::meters_per_second_t maxSpeedMetersPerSecond);
+frc2::CommandPtr DriveTo(DriveSubsystem *driveSubsystem, units::meter_t xPositionMeters, units::meter_t yPositionMeters);
+
+frc2::CommandPtr StopDrive(DriveSubsystem *DriveSubsystem);
