@@ -4,28 +4,8 @@
 
 #pragma once
 
-#include <frc/XboxController.h>
-#include <frc/controller/PIDController.h>
-#include <frc/controller/ProfiledPIDController.h>
+#include <frc2/command/button/CommandXboxController.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include <frc/geometry/Translation2d.h>
-#include <frc/shuffleboard/Shuffleboard.h>
-#include <frc/trajectory/Trajectory.h>
-#include <frc/trajectory/TrajectoryGenerator.h>
-#include <frc2/command/Command.h>
-#include <frc2/command/InstantCommand.h>
-#include <frc2/command/PIDCommand.h>
-#include <frc2/command/ParallelRaceGroup.h>
-#include <frc2/command/RunCommand.h>
-#include <frc2/command/SequentialCommandGroup.h>
-#include <frc2/command/SwerveControllerCommand.h>
-#include <frc2/command/button/JoystickButton.h>
-#include <frc2/command/Commands.h>
-
-#include <units/angle.h>
-#include <units/velocity.h>
-
-#include <utility>
 
 #include "Constants.h"
 #include "Subsystems/DriveSubsystem.h"
@@ -38,9 +18,12 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
-  frc::XboxController driverController{OIConstants::kDriverControllerPort};
 
-  frc2::CommandPtr exampleAuto = autos::ExampleAuto();
+  frc2::CommandXboxController driverController{OIConstants::kDriverControllerPort};
+
+  frc2::CommandPtr emptyAuto = autos::EmptyAuto();
+  
+  frc::SendableChooser<frc2::Command*> sendableChooser;
 
   
   DriveSubsystem drive;

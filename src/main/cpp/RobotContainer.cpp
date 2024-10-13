@@ -3,8 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
-
-
+#include <frc2/command/RunCommand.h>
+#include <frc/MathUtil.h>
 
 RobotContainer::RobotContainer() {
   drive.SetDefaultCommand(frc2::RunCommand(
@@ -26,5 +26,7 @@ RobotContainer::RobotContainer() {
 void RobotContainer::ConfigureBindings() {}
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
-  return exampleAuto.get();
+  sendableChooser.SetDefaultOption("Do Nothing", emptyAuto.get());
+
+  return sendableChooser.GetSelected();
 }

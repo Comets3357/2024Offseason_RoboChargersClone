@@ -1,5 +1,5 @@
 #include "Commands/Auto.h"
 
-frc2::CommandPtr autos::ExampleAuto() {
-   return frc2::cmd::Run([] {});
+frc2::CommandPtr autos::EmptyAuto() {
+   return frc2::cmd::None();
 }
