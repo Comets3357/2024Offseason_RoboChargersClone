@@ -3,23 +3,22 @@
 // the WPILib BSD license file in the root directory of this project.
 #pragma once
 
-#include "Subsystems/AmpSubsystem.h"
 #include <frc2/command/button/CommandXboxController.h>
-#include <frc2/command/RunCommand.h>
+#include <frc2/command/CommandPtr.h>
 
-
+#include "Subsystems/IndexerSubsystem.h"
+#include "Subsystems/AmpSubsystem.h"
 
 class RobotContainer {
  public:
   RobotContainer();
 
   frc2::CommandPtr GetAutonomousCommand();
-   
-  frc2::CommandXboxController DriverController{1};
-  
-
  private:
   AmpSubsystem Amp;
+  IndexerSubsystem indexer;
 
-  void ConfigureBindings(); 
+  frc2::CommandXboxController driverController{0};
+
+  void ConfigureBindings();
 };
