@@ -8,8 +8,6 @@ class AmpSubsystem : public frc2::SubsystemBase
 {
     public:
         AmpSubsystem();
-        //void Periodic() override;
-        void AmpExtend(double AmpExtendPower);
         void AmpEject(double AmpEjectPower);
         void AmpStop();
     private:
