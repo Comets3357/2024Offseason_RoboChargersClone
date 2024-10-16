@@ -1,4 +1,5 @@
-
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
 #include "RobotContainer.h"
 #include "Commands/DefaultPivotCommand.h"
 #include "Commands/IndexerCommands.h"
@@ -17,7 +18,7 @@ void RobotContainer::ConfigureBindings() {
 
   //pivot subsystem
  pivotSubsystem.SetDefaultCommand(DefaultPivotCommand(&pivotSubsystem,
-  [this] { return m_operatorController.GetPOV(); }          //D-Pad
+  [this] { return m_driverController.GetPOV(); }          //D-Pad
   ).ToPtr());
   
 }
