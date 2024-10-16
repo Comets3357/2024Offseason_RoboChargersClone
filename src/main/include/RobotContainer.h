@@ -11,7 +11,7 @@
 
 #include "subsystems/PivotSubsystem.h"
 #include "commands/DefaultPivotCommand.h"
-
+#include "Subsystems/IndexerSubsystem.h"]
 
 class RobotContainer {
  public:
@@ -30,6 +30,10 @@ class RobotContainer {
 
   // The robot's subsystems are defined here...
   PivotSubsystem pivotSubsystem;
+  
+  IndexerSubsystem indexer;
+
+  frc2::CommandXboxController driverController{0};
 
   void ConfigureBindings();
 };
