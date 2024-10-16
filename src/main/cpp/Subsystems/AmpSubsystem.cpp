@@ -12,4 +12,3 @@ void AmpSubsystem::AmpStop()
 {
     AmpMotor.Set(0);
 }
-
