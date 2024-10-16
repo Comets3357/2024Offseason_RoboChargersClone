@@ -1,11 +1,13 @@
 #include "subsystems/PivotSubsystem.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
+
 PivotSubsystem::PivotSubsystem() {
 
     pivotEncoder.SetVelocityConversionFactor(360 /*degrees*/);
-    pivotMotor.SetSoftLimit(rev::CANSparkBase::SoftLimitDirection::kForward, 90);
+    pivotMotor.SetSoftLimit(rev::CANSparkBase::SoftLimitDirection::kForward, 80);
     pivotMotor.SetSoftLimit(rev::CANSparkBase::SoftLimitDirection::kReverse, 30);
+    PivotPID.SetFeedbackDevice(pivotEncoder);
 }
 
 void PivotSubsystem::setAngularAngle(int angle) {
@@ -30,8 +32,8 @@ void PivotSubsystem::calculatePID() {
 
 void PivotSubsystem::Periodic() {
 
-    if (targetAngle > 90) {
-        targetAngle = 90;
+    if (targetAngle > 80) {
+        targetAngle = 80;
     }
     if (targetAngle < 30) {
         targetAngle = 30;

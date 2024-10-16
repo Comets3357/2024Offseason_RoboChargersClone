@@ -11,9 +11,9 @@ class PivotSubsystem : public frc2::SubsystemBase {
 
     PivotSubsystem();
 
-    const double pivotP = 0.04;
+    const double pivotP = 0.03;
     const double pivotI = 0;
-    const double pivotD = 0;
+    const double pivotD = 0.001;
     frc::PIDController pid{pivotP, pivotI, pivotD};
 
     int targetAngle = 60;
@@ -30,4 +30,5 @@ class PivotSubsystem : public frc2::SubsystemBase {
 
     rev::CANSparkMax pivotMotor{31, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
     rev::SparkAbsoluteEncoder pivotEncoder = pivotMotor.GetAbsoluteEncoder(rev::SparkAbsoluteEncoder::Type::kDutyCycle);
+    rev::SparkMaxPIDController PivotPID = pivotMotor.GetPIDController();
 };
