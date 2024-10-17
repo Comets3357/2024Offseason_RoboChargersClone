@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
+#include "Commands/IndexerCommands.h"
 #include <frc2/command/RunCommand.h>
 #include <frc/MathUtil.h>
 
@@ -23,7 +24,12 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
 }
 
-void RobotContainer::ConfigureBindings() {}
+void RobotContainer::ConfigureBindings() {
+  driverController.A().WhileTrue(IndexerIntake(&indexer));
+  driverController.A().OnFalse(IndexerStop(&indexer));
+  driverController.B().WhileTrue(IndexerEject(&indexer));
+  driverController.B().OnFalse(IndexerStop(&indexer));
+}
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   sendableChooser.SetDefaultOption("Do Nothing", emptyAuto.get());

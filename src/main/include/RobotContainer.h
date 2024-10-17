@@ -4,12 +4,14 @@
 
 #pragma once
 
-#include <frc2/command/button/CommandXboxController.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
 #include "Constants.h"
 #include "Subsystems/DriveSubsystem.h"
 #include "Commands/Auto.h"
+#include <frc2/command/button/CommandXboxController.h>
+
+#include "Subsystems/IndexerSubsystem.h"
 
 class RobotContainer {
  public:
@@ -18,6 +20,8 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+  
+
 
   frc2::CommandXboxController driverController{OIConstants::kDriverControllerPort};
 
@@ -25,7 +29,7 @@ class RobotContainer {
   
   frc::SendableChooser<frc2::Command*> sendableChooser;
 
-  
+  IndexerSubsystem indexer;
   DriveSubsystem drive;
 
   void ConfigureBindings();
