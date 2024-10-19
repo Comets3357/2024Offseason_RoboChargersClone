@@ -5,6 +5,7 @@
 #include "Subsystems/DriveSubsystem.h"
 
 #include <frc/geometry/Rotation2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <units/angle.h>
 #include <units/angular_velocity.h>
 #include <units/velocity.h>
@@ -25,7 +26,7 @@ DriveSubsystem::DriveSubsystem()
                   kRearRightChassisAngularOffset},
       m_odometry{kDriveKinematics,
                  frc::Rotation2d(units::radian_t{
-                     m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)}),
+                     /*m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)*/0}),
                  {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
                   m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
                  frc::Pose2d{}} {}
@@ -33,9 +34,11 @@ DriveSubsystem::DriveSubsystem()
 void DriveSubsystem::Periodic() {
   // Implementation of subsystem periodic method goes here.
   m_odometry.Update(frc::Rotation2d(units::radian_t{
-                        m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)}),
+                        /*m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)*/0}),
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
                      m_frontRight.GetPosition(), m_rearRight.GetPosition()});
+                      field.SetRobotPose(GetPose());
+                     frc::SmartDashboard::PutData("Odometry", &field);
 }
 
 void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
@@ -113,7 +116,7 @@ void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
           ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
                 xSpeedDelivered, ySpeedDelivered, rotDelivered,
                 frc::Rotation2d(units::radian_t{
-                    m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)}))
+                    /*m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)*/0}))
           : frc::ChassisSpeeds{xSpeedDelivered, ySpeedDelivered, rotDelivered});
 
   kDriveKinematics.DesaturateWheelSpeeds(&states, DriveConstants::kMaxSpeed);
@@ -156,14 +159,14 @@ void DriveSubsystem::ResetEncoders() {
 
 units::degree_t DriveSubsystem::GetHeading() const {
   return frc::Rotation2d(
-             units::radian_t{m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)})
+             units::radian_t{/*m_gyro.GetAngle(frc::ADIS16470_IMU::IMUAxis::kZ)*/0})
       .Degrees();
 }
 
-void DriveSubsystem::ZeroHeading() { m_gyro.Reset(); }
+void DriveSubsystem::ZeroHeading() { /*m_gyro.Reset();*/ }
 
 double DriveSubsystem::GetTurnRate() {
-  return -m_gyro.GetRate(frc::ADIS16470_IMU::IMUAxis::kZ).value();
+  return /*-m_gyro.GetRate(frc::ADIS16470_IMU::IMUAxis::kZ).value()*/0;
 }
 
 frc::Pose2d DriveSubsystem::GetPose() { return m_odometry.GetPose(); }

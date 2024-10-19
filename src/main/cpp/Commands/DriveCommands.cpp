@@ -7,35 +7,31 @@ frc2::CommandPtr StopDrive(DriveSubsystem* driveSubsystem) {
 
 
 frc2::CommandPtr DriveTo(DriveSubsystem* driveSubsystem, units::meter_t xPositionMeters, units::meter_t yPositionMeters, units::radian_t rotationRadians = 0_rad, units::meters_per_second_t maxSpeedMetersPerSecond = 3_mps) {
-   return frc2::FunctionalCommand(
-      [driveSubsystem] {driveSubsystem->ResetEncoders();},
-      [driveSubsystem, xPositionMeters, yPositionMeters, rotationRadians, maxSpeedMetersPerSecond] {
          double xPosition = xPositionMeters.value();
          double yPosition = yPositionMeters.value();
          double rotation = rotationRadians.value();
          double maxSpeed = maxSpeedMetersPerSecond.value();
+         double xTarget;
+         double yTarget;
+   return frc2::FunctionalCommand(
+      [driveSubsystem] {driveSubsystem->ResetEncoders();},
+      [driveSubsystem, xPosition, yPosition, rotation, maxSpeed] {
+         double xCurrentPosition = driveSubsystem->GetPose().X().value();
+         double yCurrentPosition = driveSubsystem->GetPose().Y().value();
+         double xAway = xPosition - xCurrentPosition;
+         double yAway = yPosition - yCurrentPosition;
 
-         double MaxAbsValue = std::max(std::abs(xPosition), std::abs(yPosition));
-         //The greater of the two will be -1 or 1, the lesser will be a number [-1, 1]
-         double xRelativeRatio = xPosition/MaxAbsValue;
-         //The greater of the two will be -1 or 1, the lesser will be a number [-1, 1]
-         double yRelativeRatio = yPosition/MaxAbsValue;
-         units::meters_per_second_t xSpeed{maxSpeed*xRelativeRatio};
-         units::meters_per_second_t ySpeed{maxSpeed*yRelativeRatio};
-         double magnitude = std::sqrt(std::pow(xPosition, 2) + std::pow(yPosition, 2));
-         double speed = std::sqrt(std::pow(xSpeed.value(), 2) + std::pow(ySpeed.value(), 2));
-         double time = magnitude / speed;
-         units::radians_per_second_t rps{rotation/time};
+         units::meters_per_second_t xSpeed{xAway > 0 ? std::min(xAway, maxSpeed) : std::max(xAway, -maxSpeed)};
+         units::meters_per_second_t ySpeed{yAway > 0 ? std::min(yAway, maxSpeed) : std::max(yAway, -maxSpeed)};
+         
+         units::radians_per_second_t rps{rotation};
          driveSubsystem->Drive(xSpeed, ySpeed, rps, true, true);
       },
       [driveSubsystem] (bool interrupted) {StopDrive(driveSubsystem);},
-      [driveSubsystem, xPositionMeters, yPositionMeters] {
-         double xPosition = xPositionMeters.value();
-         double yPosition = yPositionMeters.value();
-
+      [driveSubsystem, xPosition, yPosition] {
          double xCurPos = driveSubsystem->GetPose().X().value();
          double yCurPos = driveSubsystem->GetPose().Y().value();
-         return std::floor(xCurPos) == xPosition && std::floor(yCurPos) == yPosition;
+         return std::sqrt(std::pow(xPosition - xCurPos, 2) + std::pow(yPosition - yCurPos, 2)) < 1;
       },
       {driveSubsystem}
    ).ToPtr();

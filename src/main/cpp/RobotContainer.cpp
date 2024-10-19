@@ -23,7 +23,9 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
 }
 
-void RobotContainer::ConfigureBindings() {}
+void RobotContainer::ConfigureBindings() {
+  driverController.LeftTrigger().OnTrue(DriveTo(&drive, 2_m, 2_m));
+}
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   return frc2::cmd::Print("No autonomous command configured");
