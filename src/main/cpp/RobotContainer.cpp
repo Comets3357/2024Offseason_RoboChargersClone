@@ -4,6 +4,7 @@
 
 #include "RobotContainer.h"
 #include "Commands/DriveCommands.h"
+#include "Commands/DriveTo.h"
 
 
 RobotContainer::RobotContainer() {
@@ -24,7 +25,7 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureBindings() {
-  driverController.LeftTrigger().OnTrue(DriveTo(&drive, 2_m, 2_m));
+  driverController.LeftTrigger().OnTrue(DriveTo(&drive, 2_m, 2_m).ToPtr());
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
