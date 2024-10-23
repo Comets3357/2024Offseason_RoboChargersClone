@@ -16,6 +16,8 @@ void RobotContainer::ConfigureBindings() {
   driverController.B().WhileTrue(IndexerEject(&indexer));
   driverController.B().OnFalse(IndexerStop(&indexer));
 
+  frc2::CommandPtr RobotContainer::GetAutonomousCommand() {}
+
   //pivot subsystem
  pivotSubsystem.SetDefaultCommand(DefaultPivotCommand(&pivotSubsystem,
   [this] { return m_driverController.GetPOV(); }          //D-Pad
