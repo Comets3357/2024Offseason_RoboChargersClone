@@ -3,7 +3,7 @@
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
 
-#include <rev/CANSparkMax.h>
+#include <rev/CANSparkFlex.h>
 
 class IndexerSubsystem : public frc2::SubsystemBase {
    public:
@@ -23,6 +23,6 @@ class IndexerSubsystem : public frc2::SubsystemBase {
    void Periodic() override;
    void SimulationPeriodic() override;
    private:
-   rev::CANSparkMax indexer{21, rev::CANSparkBase::MotorType::kBrushless};
+   rev::CANSparkFlex indexer{21, rev::CANSparkBase::MotorType::kBrushless};
    rev::SparkLimitSwitch beamBreak = indexer.GetForwardLimitSwitch(rev::SparkLimitSwitch::Type::kNormallyOpen);
 };
