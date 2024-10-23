@@ -21,6 +21,9 @@ class IndexerSubsystem : public frc2::SubsystemBase {
    * 
    * Those who know💀 JONKLER JONKLER SITTING ON A TREE, KISSING BABY GIRL
    */
+   * @param power How much power to put into the motor from [-1,1]
+   */
+   void RunMotor(double power);
    void StopMotor();
 
    /*
