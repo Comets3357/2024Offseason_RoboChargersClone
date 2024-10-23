@@ -1,7 +1,5 @@
 #include "Subsystems/LEDSubsystem.h"
-#include "rev/CANSparkMax.h"
 #include <frc/DriverStation.h>
-#include <frc/smartdashboard/SmartDashboard.h>
 
 LEDSubsystem::LEDSubsystem(IndexerSubsystem* indexer) {
   indexerSubsystem = indexer;
