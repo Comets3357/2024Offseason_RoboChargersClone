@@ -16,6 +16,7 @@ class LEDSubsystem : public frc2::SubsystemBase {
    bool comms = false;
    private:
    IndexerSubsystem* indexerSubsystem;
+   frc::AddressableLED led{9};
    std::array<frc::AddressableLED::LEDData, 90> ledBuffer;
-   frc::AddressableLED led{0};
+
 };

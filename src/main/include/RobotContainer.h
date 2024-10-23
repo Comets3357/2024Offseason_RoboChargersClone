@@ -7,6 +7,7 @@
 #include <frc2/command/CommandPtr.h>
 
 #include "Subsystems/IndexerSubsystem.h"
+#include "Subsystems/LEDSubsystem.h"
 
 class RobotContainer {
  public:
@@ -16,6 +17,7 @@ class RobotContainer {
 
  private:
   IndexerSubsystem indexer;
+  LEDSubsystem LEDs{&indexer};
 
   frc2::CommandPtr IndexerIntake();
   frc2::CommandPtr IndexerToLauncher();
