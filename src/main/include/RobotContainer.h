@@ -9,6 +9,7 @@
 #include "Subsystems/IndexerSubsystem.h"
 #include "Subsystems/AmpSubsystem.h"
 #include "Subsystems/LEDSubsystem.h"
+#include "subsystems/PivotSubsystem.h"
 
 class RobotContainer {
  public:
@@ -19,6 +20,7 @@ class RobotContainer {
   AmpSubsystem Amp;
   IndexerSubsystem indexer;
   LEDSubsystem led{&indexer}; 
+  PivotSubsystem pivotSubsystem;
 
   frc2::CommandXboxController driverController{0};
 

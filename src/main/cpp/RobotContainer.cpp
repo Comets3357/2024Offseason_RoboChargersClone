@@ -4,6 +4,7 @@
 
 #include "RobotContainer.h"
 #include "Commands/AmpCommands.h"
+#include "Commands/DefaultPivotCommand.h"
 #include "Commands/IndexerCommands.h"
 #include <frc2/command/Commands.h>
 
@@ -18,6 +19,9 @@ void RobotContainer::ConfigureBindings() {
   driverController.B().OnFalse(IndexerStop(&indexer));
   driverController.X().OnTrue(AmpEject(&Amp));
   driverController.X().OnFalse(AmpStop(&Amp));
+
+  //pivot subsystem
+  pivotSubsystem.SetDefaultCommand(DefaultPivotCommand(&pivotSubsystem, [this] { return m_driverController.GetPOV(); }).ToPtr());
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
