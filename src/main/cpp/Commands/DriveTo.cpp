@@ -1,5 +1,7 @@
 #include <Commands/DriveTo.h>
 #include <Commands/DriveCommands.h>
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 DriveTo::DriveTo(DriveSubsystem* driveSubsystem, units::meter_t xDisplacementMeters, units::meter_t yDisplacementMeters, units::radian_t rotationRadians, units::meters_per_second_t maxSpeedMetersPerSecond) 
 : driveSubsystem{driveSubsystem} {
@@ -19,6 +21,18 @@ void DriveTo::Initialize() {
 void DriveTo::Execute() {
    double xAway = xTarget - driveSubsystem->GetPose().X().value();
    double yAway = yTarget - driveSubsystem->GetPose().Y().value();
+   
+   frc::Field2d robotPose{};
+   robotPose.SetRobotPose(driveSubsystem->GetPose());
+   frc::SmartDashboard::PutData("Robot Pose", &robotPose);
+
+   frc::Field2d targetPose{};
+   frc::Rotation2d zeroRotation{0_deg};
+   units::meter_t xTargetMeters{xTarget};
+   units::meter_t yTargetMeters{yTarget};
+   frc::Pose2d targetRealPose{xTargetMeters, yTargetMeters, zeroRotation};
+   targetPose.SetRobotPose(targetRealPose);
+   frc::SmartDashboard::PutData("Target Pose", &targetPose);
 
    units::meters_per_second_t xSpeed{xAway > 0 ? std::min(xAway, maxSpeed) : std::max(xAway, -maxSpeed)};
    units::meters_per_second_t ySpeed{yAway > 0 ? std::min(yAway, maxSpeed) : std::max(yAway, -maxSpeed)};
