@@ -6,7 +6,7 @@ frc2::CommandPtr IndexerIntake(IndexerSubsystem* indexer) {
     if (indexer->GamePieceDetected()){
       indexer->StopMotor();
     } else {
-      indexer->RunMotor(0.2);
+      indexer->RunMotor(0.4);
     }
   });
 }
