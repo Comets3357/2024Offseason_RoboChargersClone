@@ -10,7 +10,7 @@
 #include "Commands/Auto.h"
 #include <frc2/command/button/CommandXboxController.h>
 #include <frc2/command/CommandPtr.h>
-
+#include "Subsystems/IntakeSubsystem.h"
 #include "Subsystems/IndexerSubsystem.h"
 #include "Subsystems/AmpSubsystem.h"
 
@@ -33,6 +33,7 @@ class RobotContainer {
   AmpSubsystem Amp;
   IndexerSubsystem indexer;
   DriveSubsystem drive;
+  IntakeSubsystem Intake;
 
   void ConfigureBindings();
 };

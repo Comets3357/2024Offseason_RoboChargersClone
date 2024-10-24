@@ -4,6 +4,7 @@
 
 #include "RobotContainer.h"
 #include "Commands/AmpCommands.h"
+#include "Commands/IntakeCommands.h"
 #include "Commands/IndexerCommands.h"
 #include <frc2/command/RunCommand.h>
 #include <frc/MathUtil.h>
@@ -33,6 +34,8 @@ void RobotContainer::ConfigureBindings() {
   driverController.B().OnFalse(IndexerStop(&indexer));
   driverController.X().OnTrue(AmpEject(&Amp));
   driverController.X().OnFalse(AmpStop(&Amp));
+  driverController.Y().OnTrue(IntakeRun(&Intake));
+  driverController.Y().OnFalse(IntakeStop(&Intake));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
